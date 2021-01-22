@@ -46,7 +46,6 @@ INSTALLED_APPS = [
     #Rest framework
     'rest_framework',
     'rest_framework.authtoken',
-    'djoser',
 ]
 
 MIDDLEWARE = [
@@ -101,11 +100,6 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.TokenAuthentication',
     ),
-}
-
-DJOSER = {
-    'user' : 'accounts.serializers.UserCreation',
-    'user_create' : 'accounts.serializers.UserCreation',
 }
 
 #App user model

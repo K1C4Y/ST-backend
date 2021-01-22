@@ -1,5 +1,4 @@
 from rest_framework import serializers
-from djoser.serializers import UserCreateSerializer 
 from .models import Student, Teacher, User
 from test.models import Test, TestAnswer 
 
@@ -17,10 +16,4 @@ class StudentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Student
         fields = ['id', 'username', 'testAnswers']
-
-
-class UserCreation(UserCreateSerializer):
-    class Meta(UserCreateSerializer.Meta):
-        model = User
-        fields = ['username', 'password']
 
