@@ -17,3 +17,15 @@ class StudentSerializer(serializers.ModelSerializer):
         model = Student
         fields = ['id', 'username', 'testAnswers']
 
+class StudentCreateSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Student
+        fields = ['username', 'password', 'email']
+
+class TeacherCreateSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Teacher
+        fields = ['username', 'password', 'email']
+
