@@ -27,3 +27,4 @@ class TestAccountModels:
     def test_admin_typ(self):
         obj = mixer.blend('accounts.User')
         assert obj.type == "ADMIN", 'Should be type ADMIN.'
+

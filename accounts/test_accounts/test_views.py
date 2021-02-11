@@ -1,7 +1,11 @@
 import pytest
-from accounts import views, serializers
+from rest_framework.authtoken.models import Token
+from accounts import views 
+from accounts.models import Student, Teacher
 from mixer.backend.django import mixer
 from rest_framework.test import APIRequestFactory
+from rest_framework.authtoken.views import obtain_auth_token
+
 pytestmark = pytest.mark.django_db
 
 class TestAccountViews:
@@ -33,4 +37,20 @@ class TestAccountViews:
         req = self.arf.post('/', {"username":self.username,"password":self.password, "email":self.email})
         resp = views.TeacherCreate.as_view()(req)
         assert resp.status_code == 201, 'Everyone should  create Teacher.'
+
+    def test_student_login(self):
+        student = mixer.blend("accounts.Student",username = "Mary",password="secreto1")
+        student.save()
+        req = self.arf.post('/',{"username":"Mary", "password":"secreto1"})
+        resp = views.StudentLogin.as_view()(req)
+        assert resp.status_code == 200, "Should login Teacher"
+        assert type(resp.data) == str
+
+    def test_teacher_login(self):
+        teacher = mixer.blend("accounts.Teacher",username = "Mary",password="secreto1")
+        teacher.save()
+        req = self.arf.post('/',{"username":"Mary", "password":"secreto1"})
+        resp = views.TeacherLogin.as_view()(req)
+        assert type(resp.data) == str
+        assert resp.status_code == 200, "Should login Student"
 
